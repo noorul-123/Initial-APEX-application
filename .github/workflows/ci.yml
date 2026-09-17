@@ -1,0 +1,26 @@
+name: APEX CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check APEX export
+        run: |
+          test -f apex/f104.sql
+          echo "APEX export found successfully"
+
+      - name: CI completed
+        run: |
+          echo "APEX CI pipeline completed successfully"

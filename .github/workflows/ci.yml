@@ -18,8 +18,8 @@ jobs:
 
       - name: Check APEX export
         run: |
-          test -f apex/f104.sql
-          echo "APEX export found successfully"
+          test -f apex/f100.sql
+          echo "APEX application 100 export found successfully"
 
       - name: CI completed
         run: |

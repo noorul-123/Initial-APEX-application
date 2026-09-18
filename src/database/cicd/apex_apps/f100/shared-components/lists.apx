@@ -81,6 +81,25 @@ list navigation-menu (
         }
     )
 
+    entry emp-details (
+        label: emp details
+        icon {
+            imageIconCssClasses: fa-table-pointer
+        }
+        layout {
+            sequence: 40
+        }
+        isCurrent {
+            type: pages
+            pages: 5
+        }
+        link {
+            target: {
+                page: 5
+            }
+        }
+    )
+
     entry home (
         label: Home
         icon {

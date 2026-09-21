@@ -81,6 +81,25 @@ list navigation-menu (
         }
     )
 
+    entry demo (
+        label: Demo
+        icon {
+            imageIconCssClasses: fa-table
+        }
+        layout {
+            sequence: 60
+        }
+        isCurrent {
+            type: pages
+            pages: 6
+        }
+        link {
+            target: {
+                page: 6
+            }
+        }
+    )
+
     entry details (
         label: Details
         icon {

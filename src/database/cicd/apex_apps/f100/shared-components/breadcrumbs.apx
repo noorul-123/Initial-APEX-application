@@ -14,6 +14,19 @@ breadcrumb breadcrumb (
         }
     )
 
+    entry details (
+        name: Details
+        pageNumber: 4
+        execution {
+            sequence: 10
+        }
+        link {
+            target: {
+                page: 4
+            }
+        }
+    )
+
     entry emp-details (
         name: emp details
         pageNumber: 5

@@ -19,14 +19,7 @@ page 2 (
         type: interactiveGrid
         source {
             location: localDatabase
-            type: sqlQuery
-            sqlQuery:
-                ```sql
-                select ID,
-                       NAME,
-                       LOCATION
-                  from DEMO
-                ```
+            tableName: DEMO
         }
         layout {
             sequence: 20
@@ -108,6 +101,59 @@ page 2 (
                 }
             )
 
+            displayColumn (
+                column: @CI_CD_TEST_COLUMN
+                layout {
+                    sequence: 4
+                }
+            )
+
+            displayColumn (
+                column: @EMAIL
+                layout {
+                    sequence: 5
+                }
+            )
+
+            displayColumn (
+                column: @ADDRESS
+                layout {
+                    sequence: 6
+                }
+            )
+
+            displayColumn (
+                column: @SALARY
+                layout {
+                    sequence: 7
+                }
+            )
+
+        )
+
+        column ADDRESS (
+            type: textField
+            heading {
+                heading: Address
+            }
+            layout {
+                sequence: 80
+            }
+            validation {
+                maxLength: 100
+            }
+            source {
+                databaseColumn: ADDRESS
+                dataType: varchar2
+            }
+            columnFilter {
+                performanceImpactingOperators: [
+                    contains
+                    startsWith
+                    caseInsensitive
+                    regexp
+                ]
+            }
         )
 
         column APEX$ROW_ACTION (
@@ -121,6 +167,57 @@ page 2 (
             type: rowSelector
             layout {
                 sequence: 10
+            }
+        )
+
+        column CI_CD_TEST_COLUMN (
+            type: textField
+            heading {
+                heading: Ci Cd Test Column
+            }
+            layout {
+                sequence: 60
+            }
+            validation {
+                maxLength: 100
+            }
+            source {
+                databaseColumn: CI_CD_TEST_COLUMN
+                dataType: varchar2
+            }
+            columnFilter {
+                performanceImpactingOperators: [
+                    contains
+                    startsWith
+                    caseInsensitive
+                    regexp
+                ]
+            }
+        )
+
+        column EMAIL (
+            type: textField
+            heading {
+                heading: Email
+            }
+            layout {
+                sequence: 70
+            }
+            validation {
+                valueRequired: true
+                maxLength: 100
+            }
+            source {
+                databaseColumn: EMAIL
+                dataType: varchar2
+            }
+            columnFilter {
+                performanceImpactingOperators: [
+                    contains
+                    startsWith
+                    caseInsensitive
+                    regexp
+                ]
             }
         )
 
@@ -195,6 +292,25 @@ page 2 (
                     caseInsensitive
                     regexp
                 ]
+                lovType: none
+            }
+        )
+
+        column SALARY (
+            type: numberField
+            heading {
+                heading: Salary
+                alignment: end
+            }
+            layout {
+                sequence: 90
+                columnAlignment: end
+            }
+            source {
+                databaseColumn: SALARY
+                dataType: number
+            }
+            columnFilter {
                 lovType: none
             }
         )

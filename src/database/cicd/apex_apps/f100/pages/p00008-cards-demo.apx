@@ -1,0 +1,112 @@
+page 8 (
+    name: Cards Demo
+    alias: CARDS-DEMO
+    title: Cards Demo
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region breadcrumb (
+        name: Breadcrumb
+        type: breadcrumb
+        source {
+            breadcrumb: @breadcrumb
+        }
+        layout {
+            sequence: 10
+            slot: breadcrumbBar
+        }
+        appearance {
+            template: @/title-bar
+            templateOptions: [
+                #DEFAULT#
+                t-BreadcrumbRegion--useBreadcrumbTitle
+            ]
+        }
+        componentAppearance {
+            breadcrumbTemplate: @/breadcrumb
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    region cards-demo (
+        name: Cards Demo
+        type: cards
+        source {
+            location: localDatabase
+            tableName: DEMO
+        }
+        orderBy {
+            type: item
+            item: {
+                itemName: P8_ORDER_BY
+                orderBys: {
+                    NAME: "NAME" asc
+                    LOCATION: "LOCATION" asc
+                }
+            }
+        }
+        layout {
+            sequence: 10
+            slot: body
+        }
+        appearance {
+            template: @/cards-container
+            templateOptions: [
+                #DEFAULT#
+                t-CardsRegion--hideHeader js-addHiddenHeadingRoleDesc
+            ]
+        }
+        title {
+            column: NAME
+        }
+        body {
+            column: LOCATION
+        }
+    )
+
+    pageItem P8_ORDER_BY (
+        type: selectList
+        label {
+            label: Order By
+            alignment: right
+        }
+        lov {
+            type: staticValues
+            staticValues: STATIC2:Name;NAME,Location;LOCATION
+            displayExtraValues: false
+            displayNullValue: false
+        }
+        layout {
+            sequence: 10
+            region: @cards-demo
+            slot: sortOrder
+            alignment: left
+        }
+        appearance {
+            template: @/optional-floating
+            templateOptions: #DEFAULT#
+            height: 1
+        }
+        validation {
+            valueRequired: true
+        }
+        advanced {
+            warnOnUnsavedChanges: ignore
+        }
+        default {
+            type: static
+            staticValue: NAME
+        }
+    )
+
+)
+

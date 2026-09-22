@@ -1,6 +1,19 @@
 breadcrumb breadcrumb (
     name: Breadcrumb
 
+    entry cards-demo (
+        name: Cards Demo
+        pageNumber: 8
+        execution {
+            sequence: 10
+        }
+        link {
+            target: {
+                page: 8
+            }
+        }
+    )
+
     entry cicd (
         name: CICD
         pageNumber: 3
@@ -10,6 +23,19 @@ breadcrumb breadcrumb (
         link {
             target: {
                 page: 3
+            }
+        }
+    )
+
+    entry demo (
+        name: Demo
+        pageNumber: 6
+        execution {
+            sequence: 10
+        }
+        link {
+            target: {
+                page: 6
             }
         }
     )

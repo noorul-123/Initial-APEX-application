@@ -1,44 +1,43 @@
 #!/bin/bash
 
-APP_ID=100
 REPO_DIR="$HOME/Documents/GitHub/Initial-APEX-application"
 SQLCL="/c/Users/Agile/Downloads/sqlcl-latest/sqlcl/bin/sql.exe"
 
 cd "$REPO_DIR" || exit 1
 
 echo "========================================"
-echo " APEX Export - Application $APP_ID"
+echo " SQLcl APEX + Database Object Export"
 echo "========================================"
 
 echo "Setting DEV wallet..."
 export TNS_ADMIN="/c/Users/Agile/Downloads/Wallet_agilesuitedev"
 
-echo "Exporting APEX application..."
+echo "Exporting DEV database project..."
 
 "$SQLCL" -name DEV_CICD <<EOFSQL
-apex export -applicationid $APP_ID
+project export
 exit
 EOFSQL
 
-if [ ! -f "f${APP_ID}.sql" ]; then
-    echo "ERROR: APEX export failed."
+if [ $? -ne 0 ]; then
+    echo "ERROR: SQLcl project export failed."
     exit 1
 fi
 
-mv "f${APP_ID}.sql" "apex/f${APP_ID}.sql"
+echo "SQLcl project export completed."
 
-echo "APEX export completed."
+echo "Checking for changes..."
 
-git add "apex/f${APP_ID}.sql"
+git add .dbtools src
 
 if git diff --cached --quiet; then
-    echo "No APEX changes detected."
+    echo "No APEX or database object changes detected."
     exit 0
 fi
 
-git commit -m "Update APEX application $APP_ID"
+git commit -m "Update APEX and database objects"
 git push origin main
 
 echo "========================================"
-echo " APEX Export + Git Push completed"
+echo " APEX + Database CI/CD source updated"
 echo "========================================"

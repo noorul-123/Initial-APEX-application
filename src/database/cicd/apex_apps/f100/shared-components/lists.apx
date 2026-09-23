@@ -138,6 +138,25 @@ list navigation-menu (
         }
     )
 
+    entry dept (
+        label: DEPT
+        icon {
+            imageIconCssClasses: fa-table
+        }
+        layout {
+            sequence: 90
+        }
+        isCurrent {
+            type: pages
+            pages: 9
+        }
+        link {
+            target: {
+                page: 9
+            }
+        }
+    )
+
     entry details (
         label: Details
         icon {

@@ -1,0 +1,90 @@
+page 7 (
+    name: Chart
+    alias: CHART
+    title: Chart
+    appearance {
+        pageTemplate: @/standard
+        templateOptions: #DEFAULT#
+    }
+    navigation {
+        cursorFocus: doNotFocusCursor
+    }
+    security {
+        pageAccessProtection: argumentsMustHaveChecksum
+        formAutoComplete: false
+    }
+
+    region breadcrumb (
+        name: Breadcrumb
+        type: breadcrumb
+        source {
+            breadcrumb: @breadcrumb
+        }
+        layout {
+            sequence: 10
+            slot: breadcrumbBar
+        }
+        appearance {
+            template: @/title-bar
+            templateOptions: [
+                #DEFAULT#
+                t-BreadcrumbRegion--useBreadcrumbTitle
+            ]
+        }
+        componentAppearance {
+            breadcrumbTemplate: @/breadcrumb
+            templateOptions: #DEFAULT#
+        }
+    )
+
+    region chart (
+        name: Chart
+        type: chart
+        layout {
+            sequence: 10
+            slot: body
+        }
+        appearance {
+            template: @/standard
+            templateOptions: [
+                #DEFAULT#
+                t-Region--scrollBody
+            ]
+        }
+        chartLayout {
+            height: 400
+        }
+
+        series series-1 (
+            name: Series 1
+            execution {
+                sequence: 10
+            }
+            source {
+                tableName: DEMO
+            }
+            columnMapping {
+                label: NAME
+                valueAggregation: sum
+                value: SALARY
+                labelTooltip: NAME
+            }
+        )
+
+        axis x (
+            name: x
+        )
+
+        axis y (
+            name: y
+            value {
+                format: decimal
+                decimalPlaces: 0
+                formatScaling: none
+            }
+        )
+
+    )
+
+)
+
